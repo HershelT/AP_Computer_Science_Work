@@ -1,11 +1,10 @@
-/**
+/**`
  * Module 5 Project: Cemetery
  *
  * Name: Hershel Thomas
  * 
  * AP Computer Science, Virtual Virginia
  */
-//scans file from "cemetery.txt" and looks at data from document. Creates Person Objects and fills an Array with the objects.
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,12 +26,14 @@ public class Cemetery
       System.out.println("In the St. Mary Magdelene Old Fish Cemetery --> ");
       System.out.println("Name of youngest person: " + cemetery[min].getName());
       System.out.println("Age of youngest person: " + cemetery[min].getAge());  
-      //prints out ResidentialAddress of youngest person in order to meet level 2 reuirments.
+      //prints out ResidentialAddress of youngest person in order to meet level 2 requirments.
       System.out.println("Residential Address of youngest person: " + cemetery[min].getResidentialAddress());  
       System.out.println("Name of oldest person: " + cemetery[max].getName());
       System.out.println("Age of oldest person: " + cemetery[max].getAge());
       //prints out ResidentialAddress of oldest person in order to meet level 2 reuirments.
-      System.out.println("Residential Address of oldest person: " + cemetery[max].getResidentialAddress());  
+      System.out.println("Residential Address of oldest person: " + cemetery[max].getResidentialAddress());
+      //prints out most common Residential Adress and how many times it appears to meet full level 2 requriments.
+      System.out.println(mostPopularAddress(cemetery));
    }
    
    //////// METHODS (Cemetery) ////////
@@ -81,15 +82,34 @@ public class Cemetery
                   nexLi = scan.nextLine();
               }
           }
-          
       }
       catch (Exception e)
       {
-           System.out.println("EndofFile");
+           System.out.println("File not found");
       } 
       return persons;
    }
-   
+   /*A method to return the String telling the most popular Address 
+    * and how many times it appeard to achieve the full 100 percent grade
+   */
+   public static String mostPopularAddress(Person[] arr) {
+       String address = "";
+       int countNames = 0;
+       int mostPopular = 0;
+       for (int i = 0; i < arr.length; i++) {
+           countNames = 0;
+           for (int j = 0; j < arr.length; j++) {
+               if (arr[i].getResidentialAddress().equals(arr[j].getResidentialAddress())) {
+                   countNames++;
+               } 
+               if (countNames > mostPopular) {
+                    mostPopular = countNames;
+                    address = arr[i].getResidentialAddress();
+               }
+           }
+       }
+       return "Most common Residential Adress is: " + address  + ", appearing " + mostPopular + " times!";
+   }
    /* A helper method that instantiates one Person object.
     * @param entry -- one line of the input file.
     */
@@ -221,6 +241,8 @@ class Person
    }
    /*adding getResidentialAddress accessor method here for 4th method 
     * that returns residential address in order to meet level 2 requirments
+    * Used in conjuction with Method that returns the most popular adress
+    * and how many times it appeard. 
    */
    public String getResidentialAddress() {
        return residentialAddress;
