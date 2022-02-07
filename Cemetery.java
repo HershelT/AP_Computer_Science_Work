@@ -242,7 +242,7 @@ class Person
    /*adding getResidentialAddress accessor method here for 4th method 
     * that returns residential address in order to meet level 2 requirments
     * Used in conjuction with Method that returns the most popular adress
-    * and how many times it appeard. 
+    * including how many times it appeared. 
    */
    public String getResidentialAddress() {
        return residentialAddress;
